@@ -1,7 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import {
     getAuth,
-    signInWithRedirect,
     signInWithPopup,
     GoogleAuthProvider
 } from 'firebase/auth'
@@ -26,13 +25,13 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 
-const provider = new GoogleAuthProvider();
-provider.setCustomParameters({
-    prompt: "select_account" // every time someone interacts with our provider, they have to select an account
+const googleAuthProvider = new GoogleAuthProvider();  // we can create multiple providers depending on what auth providers we want available
+googleAuthProvider.setCustomParameters({
+    prompt: "select_account" // every time someone interacts with our googleAuthProvider, they have to select an account
 })
 
 export const auth = getAuth();
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider)
+export const signInWithGooglePopup = () => signInWithPopup(auth, googleAuthProvider)
 
 export const db = getFirestore() // this points to our db in the Firebase console
 
