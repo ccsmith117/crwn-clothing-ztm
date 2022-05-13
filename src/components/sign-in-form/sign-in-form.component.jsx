@@ -78,7 +78,11 @@ const ExistingSignInForm = () => {
                 />
                 <div className='buttons-container'>
                     <Button type='submit'>Sign In</Button>
-                    <Button buttonType='google' onClick={logGoogleUser}>
+                    <Button
+                        type='button'
+                        buttonType='google'
+                        onClick={logGoogleUser}
+                    >
                         Google Sign In
                     </Button>
                 </div>

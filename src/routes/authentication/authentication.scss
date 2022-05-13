@@ -1,11 +1,7 @@
 .authentication-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-
-.sign-in-buttons-container {
-  display: flex;
+  width: 900px;
+  margin: 30px auto;
   flex-direction: row;
   justify-content: space-between;
 }
