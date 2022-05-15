@@ -39,12 +39,7 @@ export const db = getFirestore() // this points to our db in the Firebase consol
 
 export const createUserDocumentFromAuth = async (userAuth) => {
     const userDocRef = doc(db, 'users', userAuth.uid)
-
-    console.log(userDocRef)
-
     const userSnapshot = await getDoc(userDocRef)
-    console.log(userSnapshot)
-    console.log(userSnapshot.exists()) // can check if doc exists in database
 
     if (!userSnapshot.exists()) {
         const { displayName, email } = userAuth

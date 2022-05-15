@@ -5,17 +5,20 @@ import {
     signInWithGooglePopup
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input.component";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import Button from "../button/button.component";
+import {UserContext} from "../../contexts/user.context";
 
 const defaultFormFields = {
     email: '',
     password: ''
 }
 
-const ExistingSignInForm = () => {
+const SignInForm = () => {
     const [formFields, setFormFields] = useState(defaultFormFields)
     const { email, password } = formFields
+
+    const { setCurrentUser } = useContext(UserContext)
 
     const resetFormFields = () => {
         setFormFields(defaultFormFields)
@@ -33,8 +36,8 @@ const ExistingSignInForm = () => {
         event.preventDefault()
         const { email, password } = formFields
         try {
-            const response = await signInUserWithEmailAndPassword(email, password)
-            console.log(response)
+            const { user } = await signInUserWithEmailAndPassword(email, password)
+            setCurrentUser(user)
             resetFormFields()
         } catch (error) {
             switch (error.code) {
@@ -91,4 +94,4 @@ const ExistingSignInForm = () => {
     )
 }
 
-export default ExistingSignInForm
+export default SignInForm
