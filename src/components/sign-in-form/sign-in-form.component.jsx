@@ -2,10 +2,10 @@ import './sign-in-form.styles.scss'
 import {
     signInUserWithEmailAndPassword,
     signInWithGooglePopup
-} from "../../utils/firebase/firebase.utils";
-import FormInput from "../form-input/form-input.component";
-import {useState} from "react";
-import Button from "../button/button.component";
+} from '../../utils/firebase/firebase.utils'
+import FormInput from '../form-input/form-input.component'
+import {useState} from 'react'
+import Button from '../button/button.component'
 
 const defaultFormFields = {
     email: '',

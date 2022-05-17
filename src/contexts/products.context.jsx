@@ -1,4 +1,4 @@
-import {createContext, useState} from "react";
+import {createContext, useState} from 'react'
 import SHOP_DATA from '../shopdata.json'
 
 export const ProductsContext = createContext({
