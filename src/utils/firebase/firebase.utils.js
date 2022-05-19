@@ -14,7 +14,9 @@ import {
     getDoc,
     setDoc,
     collection,
-    writeBatch
+    writeBatch,
+    query,
+    getDocs
 } from 'firebase/firestore'
 
 // Your web app's Firebase configuration
@@ -43,6 +45,18 @@ export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => 
     })
 
     await batch.commit()
+}
+
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(db, 'categories')
+    const collectionQuery = query(collectionRef)
+
+    const querySnapshot = await getDocs(collectionQuery)
+    return querySnapshot.docs.reduce((accumulator, docSnapshot) => {
+        const { title, items } = docSnapshot.data()
+        accumulator[title.toLowerCase()] = items
+        return accumulator
+    }, {})
 }
 
 const googleAuthProvider = new GoogleAuthProvider();  // we can create multiple providers depending on what auth providers we want available
