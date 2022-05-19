@@ -12,7 +12,9 @@ import {
     getFirestore,
     doc,
     getDoc,
-    setDoc
+    setDoc,
+    collection,
+    writeBatch
 } from 'firebase/firestore'
 
 // Your web app's Firebase configuration
@@ -28,6 +30,20 @@ const firebaseConfig = {
 // Initialize Firebase
 
 const firebaseApp = initializeApp(firebaseConfig);
+
+// used in Section 10.128 to store shop-data.js in firebase
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    console.log(objectsToAdd)
+    const collectionRef = collection(db, collectionKey)
+    const batch = writeBatch(db)
+
+    objectsToAdd.forEach((object) => {
+        const docRef = doc(collectionRef, object.title.toLowerCase())
+        batch.set(docRef, object)
+    })
+
+    await batch.commit()
+}
 
 const googleAuthProvider = new GoogleAuthProvider();  // we can create multiple providers depending on what auth providers we want available
 googleAuthProvider.setCustomParameters({
