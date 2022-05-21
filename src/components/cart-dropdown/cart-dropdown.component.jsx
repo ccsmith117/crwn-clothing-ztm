@@ -20,7 +20,7 @@ const CartDropdown = () => {
                         (<CartItem key={cartItem.id} cartItem={cartItem}/>)
                     )
                     :
-                    <EmptyMessage>Please fill!</EmptyMessage>
+                    <EmptyMessage>Your cart is empty!</EmptyMessage>
                 }
             </CartItems>
             <Button onClick={goToCheckoutHandler}>GO TO CHECKOUT</Button>
