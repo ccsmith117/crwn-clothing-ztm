@@ -2,7 +2,7 @@ import {Route, Routes} from 'react-router-dom'
 
 import Home from './routes/home/home.component'
 import Navigation from './routes/navigation/navigation.component'
-import AuthenticationRoute from './routes/authentication/authentication.route'
+import AuthenticationComponent from './routes/authentication/authentication.component'
 import Shop from './components/shop/shop.component'
 import Checkout from './components/checkout/checkout.component'
 
@@ -12,7 +12,7 @@ const App = () => {
             <Route path='/' element={<Navigation />}>
                 <Route index element={<Home />} />
                 <Route path='shop/*' element={<Shop />} />
-                <Route path='auth' element={<AuthenticationRoute />} />
+                <Route path='auth' element={<AuthenticationComponent />} />
                 <Route path='checkout' element={<Checkout />} />
             </Route>
         </Routes>

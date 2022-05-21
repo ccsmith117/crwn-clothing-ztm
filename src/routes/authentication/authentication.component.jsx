@@ -3,7 +3,7 @@ import SignInForm from '../../components/sign-in-form/sign-in-form.component'
 import './authentication.styles'
 import {AuthenticationContainer} from './authentication.styles'
 
-const AuthenticationRoute = () => {
+const AuthenticationComponent = () => {
     return (
         <AuthenticationContainer>
             <SignInForm />
@@ -12,4 +12,4 @@ const AuthenticationRoute = () => {
     )
 }
 
-export default AuthenticationRoute
+export default AuthenticationComponent
