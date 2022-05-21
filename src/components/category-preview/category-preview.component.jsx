@@ -1,4 +1,3 @@
-import './category-preview.styles'
 import ProductCard from '../product-card/product-card.component'
 import {CategoryPreviewContainer, CategoryTitle, ProductPreviewContainer} from './category-preview.styles'
 
