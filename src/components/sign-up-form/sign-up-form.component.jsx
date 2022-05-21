@@ -1,8 +1,8 @@
 import {useState} from 'react'
 import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from '../../utils/firebase/firebase.utils'
 import FormInput from '../form-input/form-input.component'
-import './sign-up-form.styles.scss'
 import Button from '../button/button.component'
+import {SignUpContainer, SignUpHeader} from './sign-up-form.styles'
 
 const defaultFormFields = {
     displayName: '',
@@ -14,7 +14,6 @@ const defaultFormFields = {
 const SignUpForm = () => {
     const [ formFields, setFormFields ] = useState(defaultFormFields)
     const { displayName, email, password, confirmPassword } = formFields
-
     const handleChange = (event) => {
         const { name, value } = event.target
         setFormFields({
@@ -22,11 +21,9 @@ const SignUpForm = () => {
             [name]: value
         })
     }
-
     const resetFormFields = () => {
         setFormFields(defaultFormFields)
     }
-
     const handleSubmit = async (event) => {
         event.preventDefault()
         const { displayName, email, password, confirmPassword } = formFields
@@ -49,10 +46,9 @@ const SignUpForm = () => {
             alert('passwords do not match')
         }
     }
-
     return (
-        <div className='sign-up-container'>
-            <h2>Don't have an account?</h2>
+        <SignUpContainer>
+            <SignUpHeader>Don't have an account?</SignUpHeader>
             <span>Sign up with your email and password</span>
             <form onSubmit={handleSubmit}>
                 <FormInput
@@ -89,7 +85,7 @@ const SignUpForm = () => {
                 />
                 <Button type='submit'>Sign Up</Button>
             </form>
-        </div>
+        </SignUpContainer>
     )
 }
 
