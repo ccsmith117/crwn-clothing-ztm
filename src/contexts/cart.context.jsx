@@ -54,10 +54,8 @@ const clearCartItem = (cartItems, productToRemove) => {
 
 const cartReducer = (state, action) => {
     const { type, payload } = action
-    console.log(payload)
     switch (type) {
         case CART_ACTION_TYPES.SET_CART_ITEMS:
-            console.log('in set cart items')
             return {
                 ...state,
                 ...payload
