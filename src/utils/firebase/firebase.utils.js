@@ -52,11 +52,7 @@ export const getCategoriesAndDocuments = async () => {
     const collectionQuery = query(collectionRef)
 
     const querySnapshot = await getDocs(collectionQuery)
-    return querySnapshot.docs.reduce((accumulator, docSnapshot) => {
-        const { title, items } = docSnapshot.data()
-        accumulator[title.toLowerCase()] = items
-        return accumulator
-    }, {})
+    return querySnapshot.docs.map((docSnapshot) => docSnapshot.data())
 }
 
 const googleAuthProvider = new GoogleAuthProvider();  // we can create multiple providers depending on what auth providers we want available
