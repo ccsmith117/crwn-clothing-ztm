@@ -7,7 +7,6 @@ const CartIcon = () => {
     const dispatch = useDispatch()
     const isCartOpen = useSelector(selectIsCartOpen)
     const cartItemCount = useSelector(selectCartItemQuantity)
-    console.log(isCartOpen)
 
     const toggleIsCartOpen = () => {
         dispatch(setIsCartOpen(!isCartOpen))

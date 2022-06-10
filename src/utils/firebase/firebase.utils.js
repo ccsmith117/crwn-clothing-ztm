@@ -35,7 +35,6 @@ const firebaseApp = initializeApp(firebaseConfig);
 
 // used in Section 10.128 to store shop-data.js in firebase
 export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
-    console.log(objectsToAdd)
     const collectionRef = collection(db, collectionKey)
     const batch = writeBatch(db)
 
