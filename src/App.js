@@ -1,9 +1,8 @@
-import './App.scss'
-import CardContainer from './component/card-container.component'
+import CategoryContainer from './components/category-container/category-container.component'
 
 const App = () => {
   return (
-    <CardContainer />
+    <CategoryContainer />
   );
 }
 
