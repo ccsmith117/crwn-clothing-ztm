@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" name="Changes" comment="Section 4.80 - Adds font from google into project, renames css file to scss to represent us using sass for consistency, removes package-lock.json since that is for npm usage and we are using yarn anyway">
-      <change afterPath="$PROJECT_DIR$/src/routes/home/home.component.jsx" afterDir="false" />
+    <list default="true" id="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" name="Changes" comment="Section 5.87 - Updates route component to use index instead of an empty path in order to show when at the parent route path">
+      <change afterPath="$PROJECT_DIR$/src/routes/sign-in/sign-in.component.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/firebase/firebase.utils.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/navigation-bar/navigation-bar.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/navigation-bar/navigation-bar.component.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <list id="44c135b0-f267-4704-b724-4109874260b1" name="local config" comment="">
@@ -24,13 +25,14 @@
   <component name="LineStatusTrackerManager">
     <file path="$PROJECT_DIR$/.idea/workspace.xml">
       <ranges>
-        <range start1="3" end1="7" start2="3" end2="7" changelist="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" />
-        <range start1="8" end1="8" start2="8" end2="13" changelist="44c135b0-f267-4704-b724-4109874260b1" />
-        <range start1="30" end1="30" start2="35" end2="36" changelist="44c135b0-f267-4704-b724-4109874260b1" />
-        <range start1="45" end1="46" start2="51" end2="53" changelist="44c135b0-f267-4704-b724-4109874260b1" />
-        <range start1="51" end1="51" start2="58" end2="60" changelist="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" />
-        <range start1="73" end1="74" start2="82" end2="90" changelist="44c135b0-f267-4704-b724-4109874260b1" />
-        <range start1="93" end1="94" start2="109" end2="111" changelist="44c135b0-f267-4704-b724-4109874260b1" />
+        <range start1="3" end1="5" start2="3" end2="6" changelist="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" />
+        <range start1="8" end1="9" start2="9" end2="10" changelist="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" />
+        <range start1="26" end1="33" start2="27" end2="35" changelist="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" />
+        <range start1="53" end1="54" start2="55" end2="57" changelist="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" />
+        <range start1="58" end1="58" start2="61" end2="62" changelist="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" />
+        <range start1="73" end1="74" start2="77" end2="81" changelist="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" />
+        <range start1="96" end1="97" start2="103" end2="132" changelist="44c135b0-f267-4704-b724-4109874260b1" />
+        <range start1="116" end1="117" start2="151" end2="156" changelist="44c135b0-f267-4704-b724-4109874260b1" />
       </ranges>
     </file>
   </component>
@@ -51,11 +53,13 @@
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;yarn&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Program Files\\JetBrains\\IntelliJ IDEA 2022.2.2\\plugins\\JavaScriptLanguage\\jsLanguageServicesImpl\\external&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\odenall\Documents\Courses\Udemy\Complete React Developer Course\crwn-clothing\src\assets" />
       <recent name="C:\Users\odenall\Documents\Courses\Udemy\Complete React Developer Course\crwn-clothing\src\components\category-item" />
       <recent name="C:\Users\odenall\Documents\Courses\Udemy\Complete React Developer Course\crwn-clothing\src\component" />
     </key>
@@ -71,7 +75,10 @@
       <updated>1664537695405</updated>
       <workItem from="1664537697554" duration="3191000" />
       <workItem from="1665012343327" duration="624000" />
-      <workItem from="1665056833156" duration="2496000" />
+      <workItem from="1665056833156" duration="2573000" />
+      <workItem from="1665142287498" duration="3006000" />
+      <workItem from="1665403044181" duration="1901000" />
+      <workItem from="1665489250750" duration="2032000" />
     </task>
     <task id="LOCAL-00001" summary="restarting course">
       <created>1664537923795</created>
