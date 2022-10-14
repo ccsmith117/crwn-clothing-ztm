@@ -1,5 +1,5 @@
 import {initializeApp} from "firebase/app"
-import {getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth"
+import {getAuth, GoogleAuthProvider, signInWithPopup, createUserWithEmailAndPassword} from "firebase/auth"
 import {doc, getDoc, getFirestore, setDoc} from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -25,24 +25,32 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 export const database = getFirestore()
 
 export const createUserDocumentFromAuth = async (userAuth) => {
-    const userCollectionPath = 'users'
-    const userDocumentReference = doc(database, userCollectionPath, userAuth.uid)
-    const userSnapshot = await getDoc(userDocumentReference)
+    if (userAuth) {
+        const userCollectionPath = 'users'
+        const userDocumentReference = doc(database, userCollectionPath, userAuth.uid)
+        const userSnapshot = await getDoc(userDocumentReference)
 
-    if (!userSnapshot.exists()) {
-        const {displayName, email} = userAuth
-        const createdAt = new Date()
+        if (!userSnapshot.exists()) {
+            const {displayName, email} = userAuth
+            const createdAt = new Date()
 
-        try {
-            await setDoc(userDocumentReference, {
-                displayName,
-                email,
-                createdAt
-            })
-        } catch (error) {
-            console.log('error creating the user', error.message)
+            try {
+                await setDoc(userDocumentReference, {
+                    displayName,
+                    email,
+                    createdAt
+                })
+            } catch (error) {
+                console.log('error creating the user', error.message)
+            }
         }
-    }
 
-    return userDocumentReference
+        return userDocumentReference
+    }
+}
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+    if (email && password) {
+        return await createUserWithEmailAndPassword(auth, email, password)
+    }
 }
