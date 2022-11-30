@@ -1,14 +1,9 @@
-import {
-    createUserDocumentFromAuth,
-    signInUserWithEmailAndPassword,
-    signInWithGooglePopup
-} from '../../utils/firebase/firebase.utils'
+import {signInUserWithEmailAndPassword, signInWithGooglePopup} from '../../utils/firebase/firebase.utils'
 import FormInput from '../../components/form-input/form-input.component'
 import Button from '../../components/button/button.component'
-import {useContext, useState} from 'react'
+import {useState} from 'react'
 
 import './sign-in.styles.scss'
-import {UserContext} from '../../context/user.context'
 
 const defaultFormFields = {
     email: '',
@@ -18,7 +13,6 @@ const defaultFormFields = {
 const SignInForm = () => {
     let [formFields, setFormFields] = useState(defaultFormFields)
     const {email, password} = formFields
-    const {setCurrentUser} = useContext(UserContext)
 
     const handleChange = async (event) => {
         const {name, value} = event.target
@@ -32,10 +26,8 @@ const SignInForm = () => {
 
     const signInWithCredentials = async() => {
         try {
-            const user = await signInUserWithEmailAndPassword(email, password)
-            setCurrentUser(user)
+            await signInUserWithEmailAndPassword(email, password)
             resetFormFields()
-            console.log(user)
         } catch (error) {
             switch (error.code) {
                 case 'auth/user-not-found':
@@ -55,9 +47,7 @@ const SignInForm = () => {
     }
 
     const signInWithGoogle = async () => {
-        const {user} = await signInWithGooglePopup()
-        await createUserDocumentFromAuth(user)
-        setCurrentUser(user)
+        await signInWithGooglePopup()
     }
 
     return (
