@@ -39,7 +39,7 @@ const NavigationBar = () => {
                 }
                 <CartIcon />
             </div>
-            {isCartOpen ? <CartDropdown/> : null}
+            {isCartOpen && <CartDropdown/>}
             <Outlet />
         </>
     )
