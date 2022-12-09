@@ -3,6 +3,7 @@ import {useContext} from 'react'
 import {CartContext} from '../../context/cart.context'
 
 const CheckoutItem = ({cartItem}) => {
+    const {name, imageUrl, price, quantity} = cartItem
     const {decreaseCartItemQuantity, increaseCartItemQuantity, removeCartItem} = useContext(CartContext)
 
     const decreaseCartItem = () => {
@@ -18,16 +19,18 @@ const CheckoutItem = ({cartItem}) => {
     }
 
     return (
-        <div className='checkoutGridHeader'>
-            <img src={cartItem.imageUrl} alt={`${cartItem.name}`} />
-            <span>{cartItem.name}</span>
-            <div>
-                <button onClick={decreaseCartItem}>{'<'}</button>
-                {cartItem.quantity}
-                <button onClick={increaseCartItem}>{'>'}</button>
+        <div className='checkout-item-container'>
+            <div className='image-container'>
+                <img src={imageUrl} alt={`${name}`} />
             </div>
-            <span>{cartItem.quantity * cartItem.price}</span>
-            <button onClick={removeItemFromCart}>X</button>
+            <span className='name'>{name}</span>
+            <div className='quantity'>
+                <div className='arrow' onClick={decreaseCartItem}>&#10094;</div>
+                <span className='value'>{quantity}</span>
+                <div className='arrow' onClick={increaseCartItem}>&#10095;</div>
+            </div>
+            <span className='price'>{quantity * price}</span>
+            <div className='remove-button' onClick={removeItemFromCart}>&#10005;</div>
         </div>
     )
 }

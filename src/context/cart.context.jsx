@@ -2,7 +2,7 @@ import {createContext, useEffect, useState} from 'react'
 
 export const CartContext = createContext({
     isOpen: false,
-    setIsOpen: () => {},
+    setIsCartOpen: () => {},
     cartItems: [],
     cartItemCount: 0,
     cartTotalPrice: 0,
@@ -23,7 +23,7 @@ export const CartProvider = ({children}) => {
     }, [cartItems])
 
     const updateCartItemCount = () => {
-        const count = cartItems.reduce((accumulator, cartItem) => accumulator + cartItem.quantity, 0)
+        const count = cartItems.reduce((total, cartItem) => total + cartItem.quantity, 0)
         setCartItemCount(count)
     }
 
@@ -32,7 +32,7 @@ export const CartProvider = ({children}) => {
     }, [cartItems])
 
     const updateCartTotalPrice = () => {
-        const count = cartItems.reduce((accumulator, cartItem) => accumulator + (cartItem.quantity * cartItem.price), 0)
+        const count = cartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0)
         setCartTotalPrice(count)
     }
 
