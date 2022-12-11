@@ -1,14 +1,14 @@
 import {initializeApp} from "firebase/app"
 import {
+    createUserWithEmailAndPassword,
     getAuth,
     GoogleAuthProvider,
-    signInWithPopup,
+    onAuthStateChanged,
     signInWithEmailAndPassword,
-    createUserWithEmailAndPassword,
-    signOut,
-    onAuthStateChanged
+    signInWithPopup,
+    signOut
 } from "firebase/auth"
-import {doc, getDoc, getFirestore, setDoc} from 'firebase/firestore'
+import {collection, doc, getDoc, getDocs, getFirestore, query, setDoc, writeBatch} from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: "AIzaSyC8zo0-nXcFRrb_qFqyIYPz_ncwY_ZAl3s",
@@ -31,6 +31,30 @@ export const auth = getAuth()
 export const signInWithGooglePopup = () => signInWithPopup(auth, googleProvider)
 
 export const database = getFirestore()
+
+export const addCollectionAndDocuments = async (collectionKey, objectsToAdd) => {
+    const collectionRef = collection(database, collectionKey)
+    const batch = writeBatch(database)
+
+    objectsToAdd.forEach((object) => {
+        const docRef = doc(collectionRef, object.title.toLowerCase())
+        batch.set(docRef, object)
+    })
+
+    await batch.commit()
+    console.log('done')
+}
+
+export const getCategoriesAndDocuments = async () => {
+    const collectionRef = collection(database, 'categories')
+    const q = query(collectionRef)
+    const querySnapshot = await getDocs(q)
+    return querySnapshot.docs.reduce((accumulator, docSnapshot) => {
+        const {title, items} = docSnapshot.data()
+        accumulator[title.toLowerCase()] = items
+        return accumulator
+    }, {})
+}
 
 export const createUserDocumentFromAuth = async (userAuth) => {
     if (userAuth) {
