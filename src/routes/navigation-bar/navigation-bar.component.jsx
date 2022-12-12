@@ -23,21 +23,17 @@ const NavigationBar = () => {
                     <Link className='nav-link' to='/shop'>
                         SHOP
                     </Link>
-                </div>
-                {currentUser ?
-                    <div className='nav-links-container'>
+                    {currentUser ?
                         <span className='nav-link' onClick={signOutUser}>
                             SIGN OUT
                         </span>
-                    </div>
-                    :
-                    <div className='nav-links-container'>
+                        :
                         <Link className='nav-link' to='/auth'>
                             SIGN IN
                         </Link>
-                    </div>
-                }
-                <CartIcon />
+                    }
+                    <CartIcon />
+                </div>
             </div>
             {isCartOpen && <CartDropdown/>}
             <Outlet />

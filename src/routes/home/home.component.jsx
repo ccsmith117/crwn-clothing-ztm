@@ -1,4 +1,4 @@
-import CategoryContainer from '../../components/category-container/category-container.component'
+import DirectoryContainer from '../../components/directory/directory-container.component'
 
 const categories = [
     {
@@ -30,7 +30,7 @@ const categories = [
 
 const Home = () => {
     return (
-        <CategoryContainer categories={categories}></CategoryContainer>
+        <DirectoryContainer categories={categories}></DirectoryContainer>
     )
 }
 
