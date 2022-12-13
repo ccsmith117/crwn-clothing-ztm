@@ -22,14 +22,19 @@ const NavigationBar = () => {
                     <NavigationLink to='/shop'>
                         SHOP
                     </NavigationLink>
-                    {currentUser ?
-                        <NavigationLink as='span' className='nav-link' onClick={signOutUser}>
-                            SIGN OUT
-                        </NavigationLink>
-                        :
-                        <NavigationLink to='/auth'>
-                            SIGN IN
-                        </NavigationLink>
+                    {
+                        currentUser ?
+                            <NavigationLink
+                                as='span'
+                                className='nav-link'
+                                onClick={signOutUser}
+                            >
+                                SIGN OUT
+                            </NavigationLink>
+                            :
+                            <NavigationLink to='/auth'>
+                                SIGN IN
+                            </NavigationLink>
                     }
                     <CartIcon />
                 </NavigationLinksContainer>
