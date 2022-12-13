@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" name="Changes" comment="Section 5.87 - Updates route component to use index instead of an empty path in order to show when at the parent route path">
-      <change afterPath="$PROJECT_DIR$/src/routes/sign-in/sign-in.component.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/utils/firebase/firebase.utils.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/navigation-bar/navigation-bar.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/navigation-bar/navigation-bar.component.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    <list default="true" id="53dd719d-d7b0-4c0e-9526-ed1a53c56a17" name="Changes" comment="Section 11.136 - Converts cart-dropdown to using styled-components">
+      <change beforePath="$PROJECT_DIR$/src/components/cart-icon/cart-icon.component.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart-icon/cart-icon.component.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/cart-icon/cart-icon.styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/cart-icon/cart-icon.styles.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/checkout-item/checkout-item.styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/checkout-item/checkout-item.styles.scss" afterDir="false" />
     </list>
     <list id="44c135b0-f267-4704-b724-4109874260b1" name="local config" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
@@ -79,6 +75,21 @@
       <workItem from="1665142287498" duration="3006000" />
       <workItem from="1665403044181" duration="1901000" />
       <workItem from="1665489250750" duration="2032000" />
+      <workItem from="1665575673868" duration="1983000" />
+      <workItem from="1665662418425" duration="2331000" />
+      <workItem from="1665748684007" duration="2085000" />
+      <workItem from="1666006997094" duration="3909000" />
+      <workItem from="1666093415663" duration="4069000" />
+      <workItem from="1666179724940" duration="5294000" />
+      <workItem from="1669641651035" duration="1161000" />
+      <workItem from="1669814825814" duration="1376000" />
+      <workItem from="1669939349347" duration="2967000" />
+      <workItem from="1670246185739" duration="2588000" />
+      <workItem from="1670333105527" duration="5061000" />
+      <workItem from="1670382072649" duration="7325000" />
+      <workItem from="1670592185708" duration="2164000" />
+      <workItem from="1670714907779" duration="9234000" />
+      <workItem from="1670936664013" duration="1814000" />
     </task>
     <task id="LOCAL-00001" summary="restarting course">
       <created>1664537923795</created>
