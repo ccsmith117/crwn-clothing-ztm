@@ -1,6 +1,16 @@
-import './checkout-item.styles.scss'
 import {useContext} from 'react'
 import {CartContext} from '../../context/cart.context'
+import {
+    CheckoutItemContainer,
+    ImageContainer,
+    ItemImage,
+    Name,
+    Price,
+    Quantity,
+    QuantityArrow,
+    QuantityContainer,
+    RemoveButton
+} from './checkout-item.styles'
 
 const CheckoutItem = ({cartItem}) => {
     const {name, imageUrl, price, quantity} = cartItem
@@ -19,19 +29,19 @@ const CheckoutItem = ({cartItem}) => {
     }
 
     return (
-        <div className='checkout-item-container'>
-            <div className='image-container'>
-                <img src={imageUrl} alt={`${name}`} />
-            </div>
-            <span className='name'>{name}</span>
-            <div className='quantity'>
-                <div className='arrow' onClick={decreaseCartItem}>&#10094;</div>
-                <span className='value'>{quantity}</span>
-                <div className='arrow' onClick={increaseCartItem}>&#10095;</div>
-            </div>
-            <span className='price'>{quantity * price}</span>
-            <div className='remove-button' onClick={removeItemFromCart}>&#10005;</div>
-        </div>
+        <CheckoutItemContainer>
+            <ImageContainer>
+                <ItemImage src={imageUrl} alt={`${name}`} />
+            </ImageContainer>
+            <Name>{name}</Name>
+            <QuantityContainer>
+                <QuantityArrow onClick={decreaseCartItem}>&#10094;</QuantityArrow>
+                <Quantity>{quantity}</Quantity>
+                <QuantityArrow onClick={increaseCartItem}>&#10095;</QuantityArrow>
+            </QuantityContainer>
+            <Price>{quantity * price}</Price>
+            <RemoveButton onClick={removeItemFromCart}>&#10005;</RemoveButton>
+        </CheckoutItemContainer>
     )
 }
 
