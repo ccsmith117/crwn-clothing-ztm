@@ -2,8 +2,7 @@ import {signInUserWithEmailAndPassword, signInWithGooglePopup} from '../../utils
 import FormInput from '../../components/form-input/form-input.component'
 import Button from '../../components/button/button.component'
 import {useState} from 'react'
-
-import './sign-in.styles.scss'
+import {ButtonsContainer, SignInContainer, SignInHeader} from './sign-in.styles'
 
 const defaultFormFields = {
     email: '',
@@ -51,8 +50,8 @@ const SignInForm = () => {
     }
 
     return (
-        <div className='sign-in-container'>
-            <h2>I already have an account</h2>
+        <SignInContainer>
+            <SignInHeader>I already have an account</SignInHeader>
             <span>Sign in with your email and password</span>
 
             <form onSubmit={submitUserCredentials}>
@@ -76,7 +75,7 @@ const SignInForm = () => {
                         required: true
                     }}
                 />
-                <div className='buttons-container'>
+                <ButtonsContainer>
                     <Button type='submit'>
                         Sign in
                     </Button>
@@ -88,9 +87,9 @@ const SignInForm = () => {
                     >
                         Google Sign In
                     </Button>
-                </div>
+                </ButtonsContainer>
             </form>
-        </div>
+        </SignInContainer>
     )
 }
 
