@@ -38,7 +38,7 @@ export const DirectoryItemContainer = styled(Link)`
   }
 `
 
-export const DirectoryItemBackgroundImage = styled.div.attrs(props => props)`
+export const DirectoryItemBackgroundImage = styled.div`
   width: 100%;
   height: 100%;
   background-size: cover;
