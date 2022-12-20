@@ -9,7 +9,7 @@ const CartDropdown = () => {
     const {cartItems, setIsCartOpen} = useContext(CartContext)
     const navigate = useNavigate()
 
-    const gotToCheckout = () => {
+    const goToCheckout = () => {
         navigate('/checkout')
         setIsCartOpen(false)
     }
@@ -32,7 +32,7 @@ const CartDropdown = () => {
             <CartItemsContainer>
                 <CartItems />
             </CartItemsContainer>
-            <Button onClick={gotToCheckout}>CHECKOUT</Button>
+            <Button onClick={goToCheckout}>CHECKOUT</Button>
         </CartDropdownContainer>
     )
 }
