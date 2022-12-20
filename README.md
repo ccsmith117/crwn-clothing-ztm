@@ -9,5 +9,6 @@ So far, it utilizes:
   * Google sign-in as well as account creation and authentication
   * Data management with Firebase noSQL database
 * Netlify
+  * CI/CD and website hosting
 
 [Take a look at it here!](https://lovely-zabaione-1d6aff.netlify.app)
