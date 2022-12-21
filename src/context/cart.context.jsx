@@ -148,7 +148,7 @@ export const CartProvider = ({children}) => {
     }
 
     const increaseCartItemQuantity = (product) => {
-        dispatch({type: CART_ACTIONS.INCREASE_ITEM_QUANTITY, payload: product.id})
+        dispatch({type: CART_ACTIONS.INCREASE_ITEM_QUANTITY, payload: product})
     }
 
     const removeCartItem = (product) => {
