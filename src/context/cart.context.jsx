@@ -13,10 +13,7 @@ export const CartContext = createContext({
 })
 
 const CART_ACTIONS = {
-    ADD_PRODUCT_TO_CART: 'ADD_PRODUCT_TO_CART',
-    INCREASE_ITEM_QUANTITY: 'INCREASE_ITEM_QUANTITY',
-    DECREASE_ITEM_QUANTITY: 'DECREASE_ITEM_QUANTITY',
-    REMOVE_PRODUCT_FROM_CART: 'REMOVE_PRODUCT_FROM_CART',
+    UPDATE_CART_ITEMS: 'UPDATE_CART_ITEMS',
     TOGGLE_CART_DROPDOWN: 'TOGGLE_CART_DROPDOWN'
 }
 
@@ -31,21 +28,10 @@ const cartReducer = (state, action) => {
     const {type, payload} = action
 
     switch (type) {
-        case CART_ACTIONS.ADD_PRODUCT_TO_CART:
-        case CART_ACTIONS.INCREASE_ITEM_QUANTITY:
+        case CART_ACTIONS.UPDATE_CART_ITEMS:
             return {
                 ...state,
-                ...addProductToCart(state.cartItems, payload)
-            }
-        case CART_ACTIONS.DECREASE_ITEM_QUANTITY:
-            return {
-                ...state,
-                ...decreaseCartItemQuantityByOne(state.cartItems, payload)
-            }
-        case CART_ACTIONS.REMOVE_PRODUCT_FROM_CART:
-            return {
-                ...state,
-                ...removeCartItem(state.cartItems, payload)
+                ...payload
             }
         case CART_ACTIONS.TOGGLE_CART_DROPDOWN:
             return {
@@ -54,18 +40,6 @@ const cartReducer = (state, action) => {
             }
         default:
             throw new Error(`Unsupported type ${type} in cartReducer`)
-    }
-}
-
-const addProductToCart = (cartItems, product) => {
-    const updatedCartItems = isExistingCartItem(cartItems, product.id) ?
-        increaseCartItemQuantityByOne(cartItems, product.id) : addNewProductToCart(cartItems, product)
-    const cartItemCount = updateCartItemCount(updatedCartItems)
-    const cartTotalPrice = updateCartTotalPrice(updatedCartItems)
-    return {
-        cartItems: updatedCartItems,
-        cartItemCount,
-        cartTotalPrice
     }
 }
 
@@ -98,37 +72,8 @@ const updateCartTotalPrice = (cartItems) => {
     return cartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0)
 }
 
-const decreaseCartItemQuantityByOne = (cartItems, id) => {
-    const updatedCartItems = cartItems.map((cartItem) =>
-        cartItem.id === id ?
-            decrementQuantityOf(cartItem)
-            :
-            cartItem
-    ).filter((cartItem) => cartItem.quantity > 0)
-    const cartItemCount = updateCartItemCount(updatedCartItems)
-    const cartTotalPrice = updateCartTotalPrice(updatedCartItems)
-    return {
-        cartItems: updatedCartItems,
-        cartItemCount,
-        cartTotalPrice
-    }
-}
-
 const decrementQuantityOf = (cartItem) => {
     return {...cartItem, quantity: cartItem.quantity - 1}
-}
-
-const removeCartItem = (cartItems, id) => {
-    if (isExistingCartItem(cartItems, id)) {
-        const updatedCartItems = cartItems.filter((cartItem) => cartItem.id !== id)
-        const cartItemCount = updateCartItemCount(updatedCartItems)
-        const cartTotalPrice = updateCartTotalPrice(updatedCartItems)
-        return {
-            cartItems: updatedCartItems,
-            cartItemCount,
-            cartTotalPrice
-        }
-    }
 }
 
 export const CartProvider = ({children}) => {
@@ -140,19 +85,45 @@ export const CartProvider = ({children}) => {
     }
 
     const addProductToCart = (product) => {
-        dispatch({type: CART_ACTIONS.ADD_PRODUCT_TO_CART, payload: product})
+        const updatedCartItems = isExistingCartItem(cartItems, product.id) ?
+            increaseCartItemQuantityByOne(cartItems, product.id) : addNewProductToCart(cartItems, product)
+        const updatedCartState = {
+            cartItems: updatedCartItems,
+            cartItemCount: updateCartItemCount(updatedCartItems),
+            cartTotalPrice: updateCartTotalPrice(updatedCartItems)
+        }
+        dispatch({type: CART_ACTIONS.UPDATE_CART_ITEMS, payload: updatedCartState})
     }
 
-    const decreaseCartItemQuantity = (product) => {
-        dispatch({type: CART_ACTIONS.DECREASE_ITEM_QUANTITY, payload: product.id})
+    const decreaseCartItemQuantity = ({id}) => {
+        const updatedCartItems = cartItems.map((cartItem) =>
+            cartItem.id === id ?
+                decrementQuantityOf(cartItem)
+                :
+                cartItem
+        ).filter((cartItem) => cartItem.quantity > 0)
+        const updatedCartState = {
+            cartItems: updatedCartItems,
+            cartItemCount: updateCartItemCount(updatedCartItems),
+            cartTotalPrice: updateCartTotalPrice(updatedCartItems)
+        }
+        dispatch({type: CART_ACTIONS.UPDATE_CART_ITEMS, payload: updatedCartState})
     }
 
     const increaseCartItemQuantity = (product) => {
-        dispatch({type: CART_ACTIONS.INCREASE_ITEM_QUANTITY, payload: product})
+        addProductToCart(product)
     }
 
-    const removeCartItem = (product) => {
-        dispatch({type: CART_ACTIONS.REMOVE_PRODUCT_FROM_CART, payload: product.id})
+    const removeCartItem = ({id}) => {
+        if (isExistingCartItem(cartItems, id)) {
+            const updatedCartItems = cartItems.filter((cartItem) => cartItem.id !== id)
+            const updatedCartState = {
+                cartItems: updatedCartItems,
+                cartItemCount: updateCartItemCount(updatedCartItems),
+                cartTotalPrice: updateCartTotalPrice(updatedCartItems)
+            }
+            dispatch({type: CART_ACTIONS.UPDATE_CART_ITEMS, payload: updatedCartState})
+        }
     }
 
     const value = {
