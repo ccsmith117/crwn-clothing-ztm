@@ -6,10 +6,10 @@ export const CartContext = createContext({
     cartItems: [],
     cartItemCount: 0,
     cartTotalPrice: 0,
-    addProductToCart: () => {},
+    addItemToCart: () => {},
     decreaseCartItemQuantity: () => {},
     increaseCartItemQuantity: () => {},
-    removeCartItem: () => {}
+    removeItemFromCart: () => {}
 })
 
 const CART_ACTIONS = {
@@ -43,6 +43,11 @@ const cartReducer = (state, action) => {
     }
 }
 
+const addProductToCart = (cartItems, product) => {
+    return isExistingCartItem(cartItems, product.id) ?
+        increaseCartItemQuantityByOne(cartItems, product.id) : addNewProductToCart(cartItems, product)
+}
+
 const isExistingCartItem = (cartItems, productId) => {
     return cartItems.find((cartItem) => cartItem.id === productId)
 }
@@ -72,8 +77,23 @@ const updateCartTotalPrice = (cartItems) => {
     return cartItems.reduce((total, cartItem) => total + (cartItem.quantity * cartItem.price), 0)
 }
 
+const decreaseCartItemQuantityByOne = (cartItems, id) => {
+    return cartItems.map((cartItem) =>
+        cartItem.id === id ?
+            decrementQuantityOf(cartItem)
+            :
+            cartItem
+    ).filter((cartItem) => cartItem.quantity > 0)
+}
+
 const decrementQuantityOf = (cartItem) => {
     return {...cartItem, quantity: cartItem.quantity - 1}
+}
+
+const removeCartItem = (cartItems, id) => {
+    if (isExistingCartItem(cartItems, id)) {
+        return cartItems.filter((cartItem) => cartItem.id !== id)
+    }
 }
 
 export const CartProvider = ({children}) => {
@@ -84,46 +104,34 @@ export const CartProvider = ({children}) => {
         dispatch({type: CART_ACTIONS.TOGGLE_CART_DROPDOWN, payload: isOpen})
     }
 
-    const addProductToCart = (product) => {
-        const updatedCartItems = isExistingCartItem(cartItems, product.id) ?
-            increaseCartItemQuantityByOne(cartItems, product.id) : addNewProductToCart(cartItems, product)
-        const updatedCartState = {
-            cartItems: updatedCartItems,
-            cartItemCount: updateCartItemCount(updatedCartItems),
-            cartTotalPrice: updateCartTotalPrice(updatedCartItems)
-        }
-        dispatch({type: CART_ACTIONS.UPDATE_CART_ITEMS, payload: updatedCartState})
+    const addItemToCart = (product) => {
+        const updatedCartItems = addProductToCart(cartItems, product)
+        updateCartItemState(updatedCartItems)
     }
 
     const decreaseCartItemQuantity = ({id}) => {
-        const updatedCartItems = cartItems.map((cartItem) =>
-            cartItem.id === id ?
-                decrementQuantityOf(cartItem)
-                :
-                cartItem
-        ).filter((cartItem) => cartItem.quantity > 0)
+        const updatedCartItems = decreaseCartItemQuantityByOne(cartItems, id)
+        updateCartItemState(updatedCartItems)
+    }
+
+    const increaseCartItemQuantity = (product) => {
+        addItemToCart(product)
+    }
+
+    const removeItemFromCart = ({id}) => {
+        if (isExistingCartItem(cartItems, id)) {
+            const updatedCartItems = removeCartItem(cartItems, id)
+            updateCartItemState(updatedCartItems)
+        }
+    }
+
+    const updateCartItemState = (updatedCartItems) => {
         const updatedCartState = {
             cartItems: updatedCartItems,
             cartItemCount: updateCartItemCount(updatedCartItems),
             cartTotalPrice: updateCartTotalPrice(updatedCartItems)
         }
         dispatch({type: CART_ACTIONS.UPDATE_CART_ITEMS, payload: updatedCartState})
-    }
-
-    const increaseCartItemQuantity = (product) => {
-        addProductToCart(product)
-    }
-
-    const removeCartItem = ({id}) => {
-        if (isExistingCartItem(cartItems, id)) {
-            const updatedCartItems = cartItems.filter((cartItem) => cartItem.id !== id)
-            const updatedCartState = {
-                cartItems: updatedCartItems,
-                cartItemCount: updateCartItemCount(updatedCartItems),
-                cartTotalPrice: updateCartTotalPrice(updatedCartItems)
-            }
-            dispatch({type: CART_ACTIONS.UPDATE_CART_ITEMS, payload: updatedCartState})
-        }
     }
 
     const value = {
@@ -132,10 +140,10 @@ export const CartProvider = ({children}) => {
         cartItems,
         cartItemCount,
         cartTotalPrice,
-        addProductToCart,
+        addItemToCart,
         decreaseCartItemQuantity,
         increaseCartItemQuantity,
-        removeCartItem
+        removeItemFromCart
     }
 
     return <CartContext.Provider value={value}>{children}</CartContext.Provider>

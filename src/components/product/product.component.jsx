@@ -5,9 +5,9 @@ import {Footer, ProductCardContainer, ProductImage, ProductName, ProductPrice} f
 
 const Product = ({ product }) => {
     const { name, price, imageUrl } = product
-    const {addProductToCart} = useContext(CartContext)
+    const {addItemToCart} = useContext(CartContext)
 
-    const addToCart = () => addProductToCart(product)
+    const addToCart = () => addItemToCart(product)
 
     return (
         <ProductCardContainer>
