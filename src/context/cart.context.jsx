@@ -1,4 +1,5 @@
 import {createContext, useReducer} from 'react'
+import {createAction} from '../utils/reducer/reducer.utils'
 
 export const CartContext = createContext({
     isOpen: false,
@@ -12,9 +13,9 @@ export const CartContext = createContext({
     removeItemFromCart: () => {}
 })
 
-const CART_ACTIONS = {
+const CART_ACTION_TYPES = {
     UPDATE_CART_ITEMS: 'UPDATE_CART_ITEMS',
-    TOGGLE_CART_DROPDOWN: 'TOGGLE_CART_DROPDOWN'
+    SET_IS_CART_OPEN: 'SET_IS_CART_OPEN'
 }
 
 const INITIAL_STATE = {
@@ -28,12 +29,12 @@ const cartReducer = (state, action) => {
     const {type, payload} = action
 
     switch (type) {
-        case CART_ACTIONS.UPDATE_CART_ITEMS:
+        case CART_ACTION_TYPES.UPDATE_CART_ITEMS:
             return {
                 ...state,
                 ...payload
             }
-        case CART_ACTIONS.TOGGLE_CART_DROPDOWN:
+        case CART_ACTION_TYPES.SET_IS_CART_OPEN:
             return {
                 ...state,
                 isCartOpen: payload
@@ -101,7 +102,7 @@ export const CartProvider = ({children}) => {
     const {isCartOpen, cartItems, cartItemCount, cartTotalPrice} = cart
 
     const setIsCartOpen = (isOpen) => {
-        dispatch({type: CART_ACTIONS.TOGGLE_CART_DROPDOWN, payload: isOpen})
+        dispatch(createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isOpen))
     }
 
     const addItemToCart = (product) => {
@@ -131,7 +132,7 @@ export const CartProvider = ({children}) => {
             cartItemCount: updateCartItemCount(updatedCartItems),
             cartTotalPrice: updateCartTotalPrice(updatedCartItems)
         }
-        dispatch({type: CART_ACTIONS.UPDATE_CART_ITEMS, payload: updatedCartState})
+        dispatch(createAction(CART_ACTION_TYPES.UPDATE_CART_ITEMS, updatedCartState))
     }
 
     const value = {
