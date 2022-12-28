@@ -7,4 +7,5 @@ const middleWares = [logger]
 
 const composeEnhancers = compose(applyMiddleware(...middleWares))
 
+// todo: update deprecated createStore method to use redux-toolkit
 export const store = createStore(rootReducer, undefined, composeEnhancers)
