@@ -6,13 +6,8 @@ import Shop from './routes/shop/shop.component'
 import Checkout from './routes/checkout/checkout.component'
 import {setCurrentUser} from './store/user/user.action'
 import {useEffect} from 'react'
-import {
-    createUserDocumentFromAuth,
-    getCategoriesAndDocuments,
-    onAuthStateChangeListener
-} from './utils/firebase/firebase.utils'
+import {createUserDocumentFromAuth, onAuthStateChangeListener} from './utils/firebase/firebase.utils'
 import {useDispatch} from 'react-redux'
-import {setCategoriesMap} from './store/categories/categories.action'
 
 const App = () => {
     const dispatch = useDispatch()
@@ -21,15 +16,6 @@ const App = () => {
             await createUserDocumentFromAuth(user)
             dispatch(setCurrentUser(user || {}))
         })
-    }, [])
-
-
-    useEffect(() => {
-        const getCategoriesMap = async () => {
-            const categoryMap = await getCategoriesAndDocuments()
-            dispatch(setCategoriesMap(categoryMap))
-        }
-        getCategoriesMap()
     }, [])
 
     return (
