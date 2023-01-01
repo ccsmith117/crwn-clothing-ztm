@@ -1,30 +1,31 @@
 import './checkout.styles'
-import {useContext} from 'react'
-import {CartContext} from '../../context/cart.context'
 import CheckoutItem from '../../components/checkout-item/checkout-item.component'
-import {CheckoutContainer, CheckoutHeaderContainer, EmptyCartMessage, Total} from './checkout.styles'
+import {CheckoutContainer, CheckoutHeaderContainer, EmptyCartMessage, HeaderBlock, Total} from './checkout.styles'
+import {useSelector} from 'react-redux'
+import {selectCartItems, selectCartTotalPrice} from '../../store/cart/cart.selector'
 
 const Checkout = () => {
-    const {cartItems, cartTotalPrice} = useContext(CartContext)
+    const cartItems = useSelector(selectCartItems)
+    const cartTotalPrice = useSelector(selectCartTotalPrice)
 
     return (
         <CheckoutContainer>
             <CheckoutHeaderContainer>
-                <div className='header-block'>
+                <HeaderBlock>
                     <span>Product</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Description</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Quantity</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Price</span>
-                </div>
-                <div className='header-block'>
+                </HeaderBlock>
+                <HeaderBlock>
                     <span>Remove</span>
-                </div>
+                </HeaderBlock>
             </CheckoutHeaderContainer>
             {cartItems.length === 0 && <EmptyCartMessage>Your cart is empty!  Find something to put in it. :)</EmptyCartMessage>}
             {cartItems.map((cartItem) =>

@@ -15,14 +15,14 @@ export const CheckoutHeaderContainer = styled.div`
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid darkgrey;
+`
 
-  .header-block {
-    text-transform: capitalize;
-    width: 23%;
+export const HeaderBlock = styled.div`
+  text-transform: capitalize;
+  width: 23%;
 
-    &:last-child {
-      width: 8%;
-    }
+  &:last-child {
+    width: 8%;
   }
 `
 
