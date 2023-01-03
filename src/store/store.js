@@ -3,11 +3,14 @@ import logger from 'redux-logger'
 import {rootReducer} from './root-reducer'
 import {persistReducer, persistStore} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
+import thunk from 'redux-thunk'
 
 const devMiddleWares = [logger]
 
+const generalMiddleWares = [thunk]
+
 const getMiddleWares = () => {
-    return process.env.NODE_ENV === 'development' ? devMiddleWares : []
+    return process.env.NODE_ENV === 'development' ? [...devMiddleWares, ...generalMiddleWares] : [...generalMiddleWares]
 }
 
 const composeEnhancers = compose(applyMiddleware(...getMiddleWares()))
