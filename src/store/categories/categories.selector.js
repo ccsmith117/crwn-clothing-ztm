@@ -10,3 +10,8 @@ export const selectCategoriesMap = createSelector([selectCategories],(categories
         return accumulator
     }, {})
 )
+
+export const selectCategoriesIsLoading = createSelector(
+    [selectCategoryState],
+    (categories) => categories.isLoading
+)
