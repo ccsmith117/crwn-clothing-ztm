@@ -4,9 +4,13 @@ import {rootReducer} from './root-reducer'
 import {persistReducer, persistStore} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-const middleWares = [logger]
+const devMiddleWares = [logger]
 
-const composeEnhancers = compose(applyMiddleware(...middleWares))
+const getMiddleWares = () => {
+    return process.env.NODE_ENV === 'development' ? devMiddleWares : []
+}
+
+const composeEnhancers = compose(applyMiddleware(...getMiddleWares()))
 
 const persistConfig = {
     key: 'root',
