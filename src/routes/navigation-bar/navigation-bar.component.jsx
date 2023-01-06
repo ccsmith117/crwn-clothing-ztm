@@ -11,7 +11,6 @@ import {selectIsCartOpen} from '../../store/cart/cart.selector'
 const NavigationBar = () => {
     const currentUser = useSelector(selectCurrentUser)
     const isCartOpen = useSelector(selectIsCartOpen)
-
     return (
         <>
             <NavigationBarContainer>
@@ -23,7 +22,7 @@ const NavigationBar = () => {
                         SHOP
                     </NavigationLink>
                     {
-                        currentUser.uid ?
+                        currentUser.id ?
                             <NavigationLink
                                 as='span'
                                 className='nav-link'
