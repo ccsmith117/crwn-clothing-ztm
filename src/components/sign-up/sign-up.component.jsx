@@ -1,10 +1,11 @@
 import {useState} from 'react'
-import {createAuthUserWithEmailAndPassword, createUserDocumentFromAuth} from '../../utils/firebase/firebase.utils'
 import FormInput from '../form-input/form-input.component'
 import Button from '../button/button.component'
 
 import './sign-up.styles'
 import {SignUpContainer, SignUpHeader} from './sign-up.styles'
+import {useDispatch} from 'react-redux'
+import {signUp} from '../../store/user/user.action'
 
 const defaultFormFields = {
     displayName: '',
@@ -16,20 +17,31 @@ const defaultFormFields = {
 const SignUpForm = () => {
     let [formFields, setFormFields] = useState(defaultFormFields)
     const {displayName, email, password, confirmPassword} = formFields
+    const dispatch = useDispatch()
 
     const handleChange = (event) => {
         const {name, value} = event.target
         setFormFields({...formFields, [name]: value})
     }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault()
-        await createUser()
+    const isFormValid = () => {
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.")
+            return false;
+        }
+        return true;
     }
 
-    const createUser = async () => {
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        if (isFormValid()) {
+            createUser()
+        }
+    }
+
+    const createUser = () => {
         try {
-            await createUserFromFormFields()
+            dispatch(signUp(email, password, displayName))
             resetFormFields()
         } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
@@ -38,20 +50,6 @@ const SignUpForm = () => {
                 console.log('user creation encountered an error', error)
             }
         }
-    }
-
-    const createUserFromFormFields = async () => {
-        if (password === confirmPassword) {
-            const user = await createUserInFirebase()
-            await createUserDocumentFromAuth(user)
-        } else {
-            alert("Passwords do not match.")
-        }
-    }
-
-    async function createUserInFirebase() {
-        const {user} = await createAuthUserWithEmailAndPassword(email, password)
-        return {...user, displayName}
     }
 
     const resetFormFields = () => {
