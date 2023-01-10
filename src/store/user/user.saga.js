@@ -76,7 +76,7 @@ export function* onSignOutStart() {
 
 export function* signUp({ payload: {email, password, displayName}}) {
     try {
-        const {user} = yield call(createAuthUserWithEmailAndPassword(email, password))
+        const {user} = yield call(createAuthUserWithEmailAndPassword, email, password)
         yield put(signUpSuccess({...user, displayName}))
     } catch (error) {
         yield put(signUpFailed(error))
@@ -87,8 +87,8 @@ export function* onSignUpStart() {
     yield takeLatest(USER_ACTION_TYPES.SIGN_UP_START, signUp)
 }
 
-export function* signInAfterSignUp({ payload: {user}}) {
-    yield call(getSnapshotFromUserAuth, user)
+export function* signInAfterSignUp({payload}) {
+    yield call(getSnapshotFromUserAuth, payload)
 }
 
 export function* onSignUpSuccess() {
