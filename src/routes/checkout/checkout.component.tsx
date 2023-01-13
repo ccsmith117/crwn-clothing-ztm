@@ -4,6 +4,7 @@ import {CheckoutContainer, CheckoutHeaderContainer, EmptyCartMessage, HeaderBloc
 import {useSelector} from 'react-redux'
 import {selectCartItems, selectCartTotalPrice} from '../../store/cart/cart.selector'
 import PaymentForm from '../../components/payment-form/payment-form.component'
+import {CartItem} from "../../store/cart/cart.types";
 
 const Checkout = () => {
     const cartItems = useSelector(selectCartItems)
@@ -29,10 +30,10 @@ const Checkout = () => {
                 </HeaderBlock>
             </CheckoutHeaderContainer>
             {cartItems.length === 0 && <EmptyCartMessage>Your cart is empty!  Find something to put in it. :)</EmptyCartMessage>}
-            {cartItems.map((cartItem) =>
+            {cartItems.map((cartItem: CartItem) =>
                 <CheckoutItem key={cartItem.id} cartItem={cartItem} />
             )}
-            <Total>Total: ${cartTotalPrice}</Total>
+            <Total>{`Total: ${cartTotalPrice}`}</Total>
             <PaymentForm />
         </CheckoutContainer>
     )

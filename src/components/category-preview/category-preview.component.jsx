@@ -1,4 +1,4 @@
-import Product from '../product/product.component'
+import ProductComponent from '../product/product.component'
 import {CategoryPreviewContainer, PreviewContainer, TitleLink} from './category-preview.styles'
 
 const CategoryPreview = ({title, products}) => {
@@ -12,7 +12,7 @@ const CategoryPreview = ({title, products}) => {
             <PreviewContainer>
                 {
                     products.slice(0, 4)
-                        .map((product) => <Product key={product.id} product={product} />)
+                        .map((product) => <ProductComponent key={product.id} product={product} />)
                 }
             </PreviewContainer>
         </CategoryPreviewContainer>
