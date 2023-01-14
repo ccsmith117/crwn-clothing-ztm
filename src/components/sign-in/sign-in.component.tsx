@@ -1,6 +1,6 @@
-import FormInput from '../../components/form-input/form-input.component'
+import FormInput from '../form-input/form-input.component'
 import Button, {BUTTON_TYPE_CLASSES} from '../../components/button/button.component'
-import {useState} from 'react'
+import {ChangeEvent, FormEvent, useState} from 'react'
 import {ButtonsContainer, SignInContainer, SignInHeader} from './sign-in.styles'
 import {useDispatch} from 'react-redux'
 import {emailSignInStart, googleSignInStart} from '../../store/user/user.action'
@@ -15,7 +15,7 @@ const SignInForm = () => {
     const {email, password} = formFields
     const dispatch = useDispatch()
 
-    const handleChange = (event) => {
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         const {name, value} = event.target
         setFormFields({...formFields, [name]: value})
     }
@@ -24,7 +24,7 @@ const SignInForm = () => {
         try {
             dispatch(emailSignInStart(email, password))
             resetFormFields()
-        } catch (error) {
+        } catch (error: any) { // todo how to handle error typing here?
             switch (error.code) {
                 case 'auth/user-not-found':
                     alert('User not found.')
@@ -38,7 +38,7 @@ const SignInForm = () => {
         }
     }
 
-    const submitUserCredentials = (event) => {
+    const submitUserCredentials = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
         signInUser()
     }
@@ -78,7 +78,11 @@ const SignInForm = () => {
                     }}
                 />
                 <ButtonsContainer>
-                    <Button type='submit'>
+                    <Button
+                        type='submit'
+                        isLoading={false}
+                        buttonType={BUTTON_TYPE_CLASSES.base}
+                    >
                         Sign in
                     </Button>
 
@@ -86,6 +90,7 @@ const SignInForm = () => {
                         type='button'
                         buttonType={BUTTON_TYPE_CLASSES.google}
                         onClick={signInWithGoogle}
+                        isLoading={false}
                     >
                         Google Sign In
                     </Button>

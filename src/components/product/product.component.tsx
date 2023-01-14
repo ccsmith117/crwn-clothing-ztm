@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {selectCartItems} from '../../store/cart/cart.selector'
 import {addProductToCart} from '../../store/cart/cart.action'
 
-type Product = {
+export type Product = {
     id: string,
     name: string,
     price: number,

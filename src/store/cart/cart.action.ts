@@ -1,6 +1,6 @@
 import {createAction} from '../../utils/reducer/reducer.utils'
 import {CART_ACTION_TYPES, CartItem} from './cart.types'
-import ProductComponent from "../../components/product/product.component";
+import {Product} from "../../components/product/product.component";
 
 export const setIsCartOpen = (isOpen: boolean) => createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isOpen)
 
@@ -50,12 +50,12 @@ const isExistingCartItem = (cartItems: CartItem[], productId: string) => {
 }
 
 
-export const addProductToCart = (cartItems: CartItem[], product: ProductComponent) => {
+export const addProductToCart = (cartItems: CartItem[], product: Product) => {
     return isExistingCartItem(cartItems, product.id) ?
         increaseCartItemQuantity(cartItems, product.id) : addNewProductToCart(cartItems, product)
 }
 
-const addNewProductToCart = (cartItems: CartItem[], product: ProductComponent) => {
+const addNewProductToCart = (cartItems: CartItem[], product: Product) => {
     const updatedCartItems = [...cartItems, {...product, quantity: 1}]
     return createAction(CART_ACTION_TYPES.UPDATE_CART_ITEMS, updatedCartItems)
 }

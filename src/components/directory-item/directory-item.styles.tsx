@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import {Link} from 'react-router-dom'
 
-export const DirectoryItemBackgroundImage = styled.div`
+export const DirectoryItemBackgroundImage = styled.div<{imageUrl: string}>`
   width: 100%;
   height: 100%;
   background-size: cover;
