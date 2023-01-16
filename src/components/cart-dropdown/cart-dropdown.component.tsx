@@ -34,7 +34,7 @@ const CartDropdown = () => {
             <CartItemsContainer>
                 <CartItems />
             </CartItemsContainer>
-            <Button onClick={goToCheckout} buttonType={''} isLoading={false}>CHECKOUT</Button>
+            <Button onClick={goToCheckout}>CHECKOUT</Button>
         </CartDropdownContainer>
     )
 }

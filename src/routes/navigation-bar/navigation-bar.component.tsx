@@ -25,7 +25,7 @@ const NavigationBar = () => {
                         SHOP
                     </NavigationLink>
                     {
-                        currentUser.id ?
+                        currentUser.email ?
                             <NavigationLink
                                 as='span'
                                 className='nav-link'

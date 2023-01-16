@@ -5,7 +5,7 @@ import {selectCartItems} from '../../store/cart/cart.selector'
 import {addProductToCart} from '../../store/cart/cart.action'
 
 export type Product = {
-    id: string,
+    id: number,
     name: string,
     price: number,
     imageUrl: string
@@ -31,7 +31,7 @@ const ProductComponent = ({ product }: ProductProps) => {
                 <ProductName>{name}</ProductName>
                 <ProductPrice>{price}</ProductPrice>
             </Footer>
-            <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addToCart} isLoading={false}>
+            <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addToCart}>
                 Add to cart
             </Button>
         </ProductCardContainer>
