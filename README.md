@@ -4,7 +4,6 @@ This project is in progress and made as part of the Zero To Mastery Complete Rea
 
 So far, it utilizes:
 * React 18+
-* TypeScript
 * styled-components
 * Redux
   * redux-thunk
@@ -12,10 +11,7 @@ So far, it utilizes:
 * Firebase
   * Google sign-in as well as account creation and authentication
   * Data management with Firebase noSQL database
-* Stripe
-  * Uses Stripe payment API to handle mock shop payments with a card
 * Netlify
   * CI/CD and website hosting
-  * Serverless functions
 
 [Take a look at it here!](https://lovely-zabaione-1d6aff.netlify.app)
