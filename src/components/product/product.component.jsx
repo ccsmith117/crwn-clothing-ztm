@@ -1,21 +1,10 @@
 import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
-import {Footer, ProductCardContainer, ProductImage, ProductName, ProductPrice} from './product.styles'
+import {Footer, ProductCardContainer, ProductImage, ProductName, ProductPrice} from './product-card.styles'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectCartItems} from '../../store/cart/cart.selector'
 import {addProductToCart} from '../../store/cart/cart.action'
 
-type Product = {
-    id: string,
-    name: string,
-    price: number,
-    imageUrl: string
-}
-
-type ProductProps = {
-    product: Product
-}
-
-const ProductComponent = ({ product }: ProductProps) => {
+const Product = ({ product }) => {
     const { name, price, imageUrl } = product
     const cartItems = useSelector(selectCartItems)
     const dispatch = useDispatch()
@@ -31,11 +20,11 @@ const ProductComponent = ({ product }: ProductProps) => {
                 <ProductName>{name}</ProductName>
                 <ProductPrice>{price}</ProductPrice>
             </Footer>
-            <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addToCart} isLoading={false}>
+            <Button buttonType={BUTTON_TYPE_CLASSES.inverted} onClick={addToCart}>
                 Add to cart
             </Button>
         </ProductCardContainer>
     )
 }
 
-export default ProductComponent
+export default Product
