@@ -4,11 +4,10 @@ This project is in progress and made as part of the Zero To Mastery Complete Rea
 
 So far, it utilizes:
 * React 18+
-* TypeScript
+* TypeScript 4.9+
 * styled-components
 * Redux
-  * redux-thunk
-  * redux-saga (transitioning from thunk for practice/exposure)
+  * redux-saga for handling async requests
 * Firebase
   * Google sign-in as well as account creation and authentication
   * Data management with Firebase noSQL database
