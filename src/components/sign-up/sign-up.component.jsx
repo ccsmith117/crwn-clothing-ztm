@@ -1,6 +1,6 @@
-import {ChangeEvent, FormEvent, useState} from 'react'
+import {useState} from 'react'
 import FormInput from '../form-input/form-input.component'
-import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
+import Button from '../button/button.component'
 
 import './sign-up.styles'
 import {SignUpContainer, SignUpHeader} from './sign-up.styles'
@@ -19,7 +19,7 @@ const SignUpForm = () => {
     const {displayName, email, password, confirmPassword} = formFields
     const dispatch = useDispatch()
 
-    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (event) => {
         const {name, value} = event.target
         setFormFields({...formFields, [name]: value})
     }
@@ -32,7 +32,7 @@ const SignUpForm = () => {
         return true;
     }
 
-    const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
         if (isFormValid()) {
             createUser()
@@ -43,7 +43,7 @@ const SignUpForm = () => {
         try {
             dispatch(signUp(email, password, displayName))
             resetFormFields()
-        } catch (error: any) { // todo how to handle error type?
+        } catch (error) {
             if (error.code === 'auth/email-already-in-use') {
                 alert('Cannot create user- email already in use.')
             } else {
@@ -105,13 +105,7 @@ const SignUpForm = () => {
                     }}
                 />
 
-                <Button
-                    type='submit'
-                    isLoading={false}
-                    buttonType={BUTTON_TYPE_CLASSES.base}
-                >
-                    Sign Up
-                </Button>
+                <Button type='submit'>Sign Up</Button>
             </form>
         </SignUpContainer>
     )

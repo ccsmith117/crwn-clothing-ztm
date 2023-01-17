@@ -5,13 +5,10 @@ import {
     ShopNow,
     Title
 } from './directory-item.styles'
-import {Category} from "../directory/directory-container.component";
 
-type DirectoryItemProps = {
-    category: Category
-}
-
-const DirectoryItem = ({category: {imageUrl, title}}: DirectoryItemProps) => {
+const DirectoryItem = (props) => {
+    const {category} = props
+    const {imageUrl, title} = category
     return (
         <DirectoryItemContainer to={`shop/${title.toLowerCase()}`}>
             <DirectoryItemBackgroundImage imageUrl={imageUrl} />

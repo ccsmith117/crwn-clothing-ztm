@@ -1,12 +1,7 @@
 import DirectoryItem from '../directory-item/directory-item.component'
 import {DirectoryItemContainer} from './directory-container.styles'
 
-export type Category = {
-    id: number,
-    title: string,
-    imageUrl: string
-}
-const categories: Category[] = [
+const categories = [
     {
         id: 1,
         title: 'Hats',

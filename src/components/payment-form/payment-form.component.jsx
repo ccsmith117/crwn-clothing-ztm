@@ -4,7 +4,7 @@ import {FormContainer, PaymentButton} from './payment-form.styles'
 import {selectCartTotalPrice} from '../../store/cart/cart.selector'
 import {useSelector} from 'react-redux'
 import {selectCurrentUser} from '../../store/user/user.selector'
-import {FormEvent, useState} from 'react'
+import {useState} from 'react'
 
 const PaymentForm = () => {
     const stripe = useStripe()
@@ -13,12 +13,12 @@ const PaymentForm = () => {
     const currentUser = useSelector(selectCurrentUser)
     const [isProcessingPayment, setIsProcessingPayment] = useState(false)
 
-    const convertToCents = (amount: number) => {
+    const convertToCents = (amount) => {
         return amount * 100
     }
 
-    const paymentHandler = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+    const paymentHandler = async (e) => {
+        e.preventDefault()
 
         if (!stripe || !elements) {
             console.error('stripe or elements not setup')
@@ -36,25 +36,21 @@ const PaymentForm = () => {
         }).then(res => res.json())
 
         const clientSecret = response.paymentIntent.client_secret
-        const card = elements.getElement(CardElement)
-
-        if (card != null) {
-            const paymentResult = await stripe.confirmCardPayment(clientSecret, {
-                payment_method: {
-                    card: card,
-                    billing_details: {
-                        name: currentUser.displayName ? currentUser.displayName : 'Guest'
-                    }
+        const paymentResult = await stripe.confirmCardPayment(clientSecret, {
+            payment_method: {
+                card: elements.getElement(CardElement),
+                billing_details: {
+                    name: currentUser.displayName ? currentUser.displayName : 'Guest'
                 }
-            })
-
-            setIsProcessingPayment(false)
-
-            if (paymentResult.error) {
-                alert(paymentResult.error)
-            } else if (paymentResult.paymentIntent.status === 'succeeded') {
-                alert('Payment Successful')
             }
+        })
+
+        setIsProcessingPayment(false)
+
+        if (paymentResult.error) {
+            alert(paymentResult.error)
+        } else if (paymentResult.paymentIntent.status === 'succeeded') {
+            alert('Payment Successful')
         }
     }
 

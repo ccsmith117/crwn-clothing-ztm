@@ -1,12 +1,7 @@
-import ProductComponent, {Product} from '../product/product.component'
+import ProductComponent from '../product/product.component'
 import {CategoryPreviewContainer, PreviewContainer, TitleLink} from './category-preview.styles'
 
-type CategoryPreviewProps = {
-    title: string,
-    products: Product[]
-}
-
-const CategoryPreview = ({title, products}: CategoryPreviewProps) => {
+const CategoryPreview = ({title, products}) => {
     return (
         <CategoryPreviewContainer>
             <h2>
