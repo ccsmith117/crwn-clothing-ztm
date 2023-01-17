@@ -1,10 +1,6 @@
-import {Category} from "../store/categories/categories.types";
-
-const SHOP_DATA: Category[] = [
+const SHOP_DATA = [
   {
-    id: 1,
     title: 'Hats',
-    imageUrl: 'https://i.ibb.co/cvpntL1/hats.png',
     items: [
       {
         id: 1,
@@ -63,9 +59,7 @@ const SHOP_DATA: Category[] = [
     ],
   },
   {
-    id: 3,
     title: 'Sneakers',
-    imageUrl: 'https://i.ibb.co/0jqHpnp/sneakers.png',
     items: [
       {
         id: 10,
@@ -118,9 +112,7 @@ const SHOP_DATA: Category[] = [
     ],
   },
   {
-    id: 2,
     title: 'Jackets',
-    imageUrl: 'https://i.ibb.co/px2tCc3/jackets.png',
     items: [
       {
         id: 18,
@@ -155,9 +147,7 @@ const SHOP_DATA: Category[] = [
     ],
   },
   {
-    id: 4,
     title: 'Womens',
-    imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
     items: [
       {
         id: 23,
@@ -204,9 +194,7 @@ const SHOP_DATA: Category[] = [
     ],
   },
   {
-    id: 5,
     title: 'Mens',
-    imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
     items: [
       {
         id: 30,

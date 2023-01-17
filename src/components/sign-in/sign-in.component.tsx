@@ -1,10 +1,9 @@
 import FormInput from '../form-input/form-input.component'
-import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
+import Button, {BUTTON_TYPE_CLASSES} from '../../components/button/button.component'
 import {ChangeEvent, FormEvent, useState} from 'react'
 import {ButtonsContainer, SignInContainer, SignInHeader} from './sign-in.styles'
 import {useDispatch} from 'react-redux'
 import {emailSignInStart, googleSignInStart} from '../../store/user/user.action'
-import {AuthError, AuthErrorCodes} from 'firebase/auth'
 
 const defaultFormFields = {
     email: '',
@@ -25,12 +24,12 @@ const SignInForm = () => {
         try {
             dispatch(emailSignInStart(email, password))
             resetFormFields()
-        } catch (error) {
-            switch ((error as AuthError).code) {
-                case AuthErrorCodes.USER_DELETED:
+        } catch (error: any) { // todo how to handle error typing here?
+            switch (error.code) {
+                case 'auth/user-not-found':
                     alert('User not found.')
                     break
-                case AuthErrorCodes.INVALID_PASSWORD:
+                case 'auth/wrong-password':
                     alert('Your password was incorrect.  Please try again.')
                     break
                 default:
@@ -60,22 +59,30 @@ const SignInForm = () => {
             <form onSubmit={submitUserCredentials}>
                 <FormInput
                     label='Email'
-                    type='email'
-                    name='email'
-                    value={email}
-                    onChange={handleChange}
-                    required={true}
+                    inputOptions={{
+                        type:'email',
+                        name:'email',
+                        value: email,
+                        onChange: handleChange,
+                        required: true
+                    }}
                 />
                 <FormInput
                     label='Password'
-                    type='password'
-                    name='password'
-                    value={password}
-                    onChange={handleChange}
-                    required={true}
+                    inputOptions={{
+                        type:'password',
+                        name:'password',
+                        value: password,
+                        onChange: handleChange,
+                        required: true
+                    }}
                 />
                 <ButtonsContainer>
-                    <Button type='submit'>
+                    <Button
+                        type='submit'
+                        isLoading={false}
+                        buttonType={BUTTON_TYPE_CLASSES.base}
+                    >
                         Sign in
                     </Button>
 
@@ -83,6 +90,7 @@ const SignInForm = () => {
                         type='button'
                         buttonType={BUTTON_TYPE_CLASSES.google}
                         onClick={signInWithGoogle}
+                        isLoading={false}
                     >
                         Google Sign In
                     </Button>

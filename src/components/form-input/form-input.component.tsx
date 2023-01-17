@@ -1,16 +1,25 @@
 import {FormInputGroup, FormInputLabel, Input} from './form-input.styles'
-import {FC, InputHTMLAttributes} from "react";
+import {ChangeEventHandler} from "react";
+
+type InputOptions = {
+    type: string,
+    name: string,
+    value: string,
+    onChange: ChangeEventHandler<HTMLInputElement>,
+    required: boolean
+}
 
 type FormInputProps = {
     label: string,
-} & InputHTMLAttributes<HTMLInputElement>
+    inputOptions: InputOptions
+}
 
-const FormInput: FC<FormInputProps> = ({label, ...inputOptions}) => {
+const FormInput = ({label, inputOptions}: FormInputProps) => {
     return (
         <FormInputGroup>
             <Input {...inputOptions}/>
             {label &&
-                (<FormInputLabel shrink={Boolean(inputOptions.value && typeof inputOptions.value === 'string' && inputOptions.value.length)}>
+                (<FormInputLabel shrink={inputOptions.value.length}>
                     {label}
                 </FormInputLabel>)}
         </FormInputGroup>
