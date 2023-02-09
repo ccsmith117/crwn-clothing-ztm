@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import Button from '../button/button.component'
 
 export const ProductCardContainer = styled.div`
   width: 100%;
@@ -23,6 +22,27 @@ export const ProductCardContainer = styled.div`
       display: flex;
     }
   }
+
+  @media screen and (max-width: 800px) {
+    width: 40vw;
+    
+    button {
+      display: block;
+      opacity: 0.9;
+      min-width: unset;
+      padding: 0 10px;
+      
+      &:hover {
+        .img {
+          opacity: unset;
+        }
+        
+        button {
+          opacity: unset;
+        }
+      }
+    }
+  }
 `
 
 export const ProductImage = styled.img`
@@ -42,17 +62,25 @@ export const Footer = styled.div`
   display: flex;
   justify-content: space-between;
   font-size: 18px;
+
+  @media screen and (max-width: 800px) {
+    font-size: 14px;
+  }
 `
 
 export const ProductName = styled.span`
   width: 90%;
   margin-bottom: 15px;
+
+  @media screen and (max-width: 800px) {
+    width: 80%;
+  }
 `
 
 export const ProductPrice = styled.span`
   width: 10%;
-`
 
-export const ProductButton = styled(Button)`
-
+  @media screen and (max-width: 800px) {
+    width: 20%;
+  }
 `

@@ -20,7 +20,11 @@ export const DescriptionContainer = styled.div`
   background-color: white;
   opacity: 0.7;
   position: absolute;
-`
+
+  @media screen and (max-width: 800px) {
+    width: 90px;
+    padding: 0 5px;
+  }`
 
 export const DirectoryItemContainer = styled(Link)`
   min-width: 30%;
@@ -57,6 +61,10 @@ export const DirectoryItemContainer = styled(Link)`
   &:last-child {
     margin-left: 7.5px;
   }
+  
+  @media screen and (max-width: 800px) {
+    height: 200px;
+  }
 `
 
 export const Title = styled.h2`
@@ -65,9 +73,17 @@ export const Title = styled.h2`
   font-size: 22px;
   color: #4a4a4a;
   text-transform: uppercase;
+
+  @media screen and (max-width: 800px) {
+    font-size: 16px;
+  }
 `
 
 export const ShopNow = styled.p`
   font-weight: lighter;
   font-size: 16px;
+
+  @media screen and (max-width: 800px) {
+    font-size: 12px;
+  }
 `
