@@ -22,7 +22,9 @@ const INITIAL_STATE: CategoriesState = {
 const categoriesSlice = createSlice({
     name: 'categories',
     initialState: INITIAL_STATE,
-    reducers: {},
+    reducers: {
+        testReducer(state, action) {},
+    },
 })
 
 export const categoriesReducer = (
