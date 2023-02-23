@@ -1,8 +1,7 @@
 import Button, {BUTTON_TYPE_CLASSES} from '../button/button.component'
 import {Footer, ProductCardContainer, ProductImage, ProductName, ProductPrice} from './product.styles'
-import {useDispatch, useSelector} from 'react-redux'
-import {selectCartItems} from '../../store/cart/cart.selector'
-import {addProductToCart} from '../../store/cart/cart.action'
+import {useDispatch} from 'react-redux'
+import {cartItemAdded} from '../../store/cart/cart.store'
 
 export type Product = {
     id: number,
@@ -17,11 +16,10 @@ type ProductProps = {
 
 const ProductComponent = ({ product }: ProductProps) => {
     const { name, price, imageUrl } = product
-    const cartItems = useSelector(selectCartItems)
     const dispatch = useDispatch()
 
     const addToCart = () => {
-        dispatch(addProductToCart(cartItems, product))
+        dispatch(cartItemAdded(product))
     }
 
     return (

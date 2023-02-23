@@ -1,6 +1,6 @@
 import './cart-item.styles'
 import {CartItemContainer, ItemDetails, ItemImage, ItemName} from './cart-item.styles'
-import {CartItem} from "../../store/cart/cart.types";
+import {CartItem} from '../../store/cart/cart.store'
 
 type CartItemProps = {
     cartItem: CartItem

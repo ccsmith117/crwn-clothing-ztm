@@ -4,7 +4,6 @@ import { StripeCardElement } from '@stripe/stripe-js';
 import { useSelector } from 'react-redux';
 
 import { selectCurrentUser } from '../../store/user/user.selector';
-import {selectCartTotalPrice} from "../../store/cart/cart.selector";
 
 import { BUTTON_TYPE_CLASSES } from '../button/button.component';
 
@@ -13,6 +12,7 @@ import {
     FormContainer,
     PaymentButton,
 } from './payment-form.styles';
+import {selectCartTotalPrice} from '../../store/cart/cart.store'
 
 const ifValidCardElement = (
     card: StripeCardElement | null

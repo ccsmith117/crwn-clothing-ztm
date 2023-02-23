@@ -9,10 +9,13 @@ import {
     QuantityContainer,
     RemoveButton
 } from './checkout-item.styles'
-import {selectCartItems} from '../../store/cart/cart.selector'
-import {useDispatch, useSelector} from 'react-redux'
-import {decreaseCartItemQuantity, increaseCartItemQuantity, removeItemFromCart} from '../../store/cart/cart.action'
-import {CartItem} from "../../store/cart/cart.types";
+import {useDispatch} from 'react-redux'
+import {
+    CartItem,
+    cartItemQuantityDecreasedByOne,
+    cartItemQuantityIncreasedByOne,
+    cartItemRemoved
+} from '../../store/cart/cart.store'
 
 type CheckoutItemProps = {
     cartItem: CartItem
@@ -20,12 +23,11 @@ type CheckoutItemProps = {
 
 const CheckoutItem = ({cartItem}: CheckoutItemProps) => {
     const {name, imageUrl, price, quantity, id} = cartItem
-    const cartItems = useSelector(selectCartItems)
     const dispatch = useDispatch()
 
-    const decreaseCartItem = () => dispatch(decreaseCartItemQuantity(cartItems, id))
-    const increaseCartItem = () => dispatch(increaseCartItemQuantity(cartItems, id))
-    const removeFromCart = () => dispatch(removeItemFromCart(cartItems, id))
+    const decreaseCartItem = () => dispatch(cartItemQuantityDecreasedByOne(id))
+    const increaseCartItem = () => dispatch(cartItemQuantityIncreasedByOne(id))
+    const removeFromCart = () => dispatch(cartItemRemoved(id))
 
     return (
         <CheckoutItemContainer>

@@ -5,8 +5,8 @@ import CartDropdown from '../../components/cart-dropdown/cart-dropdown.component
 import {LogoContainer, NavigationBarContainer, NavigationLink, NavigationLinksContainer} from './navigation-bar.styles'
 import {useDispatch, useSelector} from 'react-redux'
 import {selectCurrentUser} from '../../store/user/user.selector'
-import {selectIsCartOpen} from '../../store/cart/cart.selector'
 import {signOut} from '../../store/user/user.action'
+import {selectIsCartOpen} from '../../store/cart/cart.store'
 
 const NavigationBar = () => {
     const currentUser = useSelector(selectCurrentUser)

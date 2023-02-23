@@ -1,10 +1,11 @@
-import {compose, createStore, applyMiddleware} from 'redux'
 import logger from 'redux-logger'
 import {rootReducer} from './root-reducer'
 import {persistReducer, persistStore, PersistConfig} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import createSagaMiddleware from 'redux-saga'
 import {rootSaga} from './root-saga'
+import {configureStore} from '@reduxjs/toolkit'
+import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from 'redux-persist/es/constants'
 
 export type RootState = ReturnType<typeof rootReducer>
 
@@ -16,8 +17,6 @@ const generalMiddleWares = [sagaMiddleware]
 const getMiddleWares = () => {
     return process.env.NODE_ENV === 'development' ? [...devMiddleWares, ...generalMiddleWares] : [...generalMiddleWares]
 }
-
-const composeEnhancers = compose(applyMiddleware(...getMiddleWares()))
 
 type ExtendedPersistConfig = PersistConfig<RootState> & {
     whitelist: (keyof RootState)[]
@@ -31,8 +30,14 @@ const persistConfig: ExtendedPersistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
-// todo: update deprecated createStore method to use redux-toolkit
-export const store = createStore(persistedReducer, undefined, composeEnhancers)
+export const store = configureStore({
+    reducer: persistedReducer,
+    middleware: getDefaultMiddleware => getDefaultMiddleware({
+        serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+    }).concat(...getMiddleWares())
+})
 
 sagaMiddleware.run(rootSaga)
 
