@@ -13,13 +13,14 @@ import {
     REGISTER,
     REHYDRATE,
 } from 'redux-persist/es/constants'
+import { listenerMiddleware } from './listener-middleware'
 
 export type RootState = ReturnType<typeof rootReducer>
 
 const sagaMiddleware = createSagaMiddleware()
 
 const devMiddleWares = [logger]
-const generalMiddleWares = [sagaMiddleware]
+const generalMiddleWares = [sagaMiddleware, listenerMiddleware]
 
 const getMiddleWares = () => {
     return process.env.NODE_ENV === 'development'

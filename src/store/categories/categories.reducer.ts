@@ -5,6 +5,7 @@ import {
     fetchCategoriesStart,
     fetchCategoriesSuccess,
 } from './categories.action'
+import { createSlice } from '@reduxjs/toolkit'
 
 export type CategoriesState = {
     readonly categories: Category[]
@@ -17,6 +18,12 @@ const INITIAL_STATE: CategoriesState = {
     isLoading: false,
     error: null,
 }
+
+const categoriesSlice = createSlice({
+    name: 'categories',
+    initialState: INITIAL_STATE,
+    reducers: {},
+})
 
 export const categoriesReducer = (
     state = INITIAL_STATE,
