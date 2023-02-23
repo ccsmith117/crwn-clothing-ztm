@@ -1,7 +1,10 @@
-import {getCategoriesAndDocuments} from '../../utils/firebase/firebase.utils'
-import {fetchCategoriesFail, fetchCategoriesSuccess} from './categories.action'
-import {all, call, put, takeLatest} from 'typed-redux-saga/macro'
-import {CATEGORIES_ACTION_TYPES} from './categories.types'
+import { getCategoriesAndDocuments } from '../../utils/firebase/firebase.utils'
+import {
+    fetchCategoriesFail,
+    fetchCategoriesSuccess,
+} from './categories.action'
+import { all, call, put, takeLatest } from 'typed-redux-saga/macro'
+import { CATEGORIES_ACTION_TYPES } from './categories.types'
 
 function* fetchCategories() {
     try {
@@ -13,7 +16,10 @@ function* fetchCategories() {
 }
 
 function* onFetchCategories() {
-    yield* takeLatest(CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START, fetchCategories)
+    yield* takeLatest(
+        CATEGORIES_ACTION_TYPES.FETCH_CATEGORIES_START,
+        fetchCategories
+    )
 }
 
 export function* categoriesSaga() {

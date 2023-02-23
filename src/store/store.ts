@@ -1,11 +1,18 @@
 import logger from 'redux-logger'
-import {rootReducer} from './root-reducer'
-import {persistReducer, persistStore, PersistConfig} from 'redux-persist'
+import { rootReducer } from './root-reducer'
+import { persistReducer, persistStore, PersistConfig } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 import createSagaMiddleware from 'redux-saga'
-import {rootSaga} from './root-saga'
-import {configureStore} from '@reduxjs/toolkit'
-import {FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE} from 'redux-persist/es/constants'
+import { rootSaga } from './root-saga'
+import { configureStore } from '@reduxjs/toolkit'
+import {
+    FLUSH,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+    REHYDRATE,
+} from 'redux-persist/es/constants'
 
 export type RootState = ReturnType<typeof rootReducer>
 
@@ -15,7 +22,9 @@ const devMiddleWares = [logger]
 const generalMiddleWares = [sagaMiddleware]
 
 const getMiddleWares = () => {
-    return process.env.NODE_ENV === 'development' ? [...devMiddleWares, ...generalMiddleWares] : [...generalMiddleWares]
+    return process.env.NODE_ENV === 'development'
+        ? [...devMiddleWares, ...generalMiddleWares]
+        : [...generalMiddleWares]
 }
 
 type ExtendedPersistConfig = PersistConfig<RootState> & {
@@ -25,18 +34,26 @@ type ExtendedPersistConfig = PersistConfig<RootState> & {
 const persistConfig: ExtendedPersistConfig = {
     key: 'root',
     storage,
-    whitelist: ['cart']
+    whitelist: ['cart'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 export const store = configureStore({
     reducer: persistedReducer,
-    middleware: getDefaultMiddleware => getDefaultMiddleware({
-        serializableCheck: {
-            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-        },
-    }).concat(...getMiddleWares())
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [
+                    FLUSH,
+                    REHYDRATE,
+                    PAUSE,
+                    PERSIST,
+                    PURGE,
+                    REGISTER,
+                ],
+            },
+        }).concat(...getMiddleWares()),
 })
 
 sagaMiddleware.run(rootSaga)

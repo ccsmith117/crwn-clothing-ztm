@@ -7,22 +7,22 @@ import {
     Quantity,
     QuantityArrow,
     QuantityContainer,
-    RemoveButton
+    RemoveButton,
 } from './checkout-item.styles'
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import {
     CartItem,
     cartItemQuantityDecreasedByOne,
     cartItemQuantityIncreasedByOne,
-    cartItemRemoved
+    cartItemRemoved,
 } from '../../store/cart/cart.store'
 
 type CheckoutItemProps = {
     cartItem: CartItem
 }
 
-const CheckoutItem = ({cartItem}: CheckoutItemProps) => {
-    const {name, imageUrl, price, quantity, id} = cartItem
+const CheckoutItem = ({ cartItem }: CheckoutItemProps) => {
+    const { name, imageUrl, price, quantity, id } = cartItem
     const dispatch = useDispatch()
 
     const decreaseCartItem = () => dispatch(cartItemQuantityDecreasedByOne(id))
@@ -36,9 +36,13 @@ const CheckoutItem = ({cartItem}: CheckoutItemProps) => {
             </ImageContainer>
             <Name>{name}</Name>
             <QuantityContainer>
-                <QuantityArrow onClick={decreaseCartItem}>&#10094;</QuantityArrow>
+                <QuantityArrow onClick={decreaseCartItem}>
+                    &#10094;
+                </QuantityArrow>
                 <Quantity>{quantity}</Quantity>
-                <QuantityArrow onClick={increaseCartItem}>&#10095;</QuantityArrow>
+                <QuantityArrow onClick={increaseCartItem}>
+                    &#10095;
+                </QuantityArrow>
             </QuantityContainer>
             <Price>{quantity * price}</Price>
             <RemoveButton onClick={removeFromCart}>&#10005;</RemoveButton>

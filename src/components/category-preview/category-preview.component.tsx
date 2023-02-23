@@ -1,12 +1,16 @@
-import ProductComponent, {Product} from '../product/product.component'
-import {CategoryPreviewContainer, PreviewContainer, TitleLink} from './category-preview.styles'
+import ProductComponent, { Product } from '../product/product.component'
+import {
+    CategoryPreviewContainer,
+    PreviewContainer,
+    TitleLink,
+} from './category-preview.styles'
 
 type CategoryPreviewProps = {
-    title: string,
+    title: string
     products: Product[]
 }
 
-const CategoryPreview = ({title, products}: CategoryPreviewProps) => {
+const CategoryPreview = ({ title, products }: CategoryPreviewProps) => {
     return (
         <CategoryPreviewContainer>
             <h2>
@@ -15,10 +19,9 @@ const CategoryPreview = ({title, products}: CategoryPreviewProps) => {
                 </TitleLink>
             </h2>
             <PreviewContainer>
-                {
-                    products.slice(0, 4)
-                        .map((product) => <ProductComponent key={product.id} product={product} />)
-                }
+                {products.slice(0, 4).map((product) => (
+                    <ProductComponent key={product.id} product={product} />
+                ))}
             </PreviewContainer>
         </CategoryPreviewContainer>
     )

@@ -1,21 +1,21 @@
-import {createSlice, PayloadAction} from '@reduxjs/toolkit'
-import {CategoryItem} from '../categories/categories.types'
-import {createSelector} from 'reselect'
-import {RootState} from '../store'
-import {Product} from '../../components/product/product.component'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { CategoryItem } from '../categories/categories.types'
+import { createSelector } from 'reselect'
+import { RootState } from '../store'
+import { Product } from '../../components/product/product.component'
 
 export type CartItem = CategoryItem & {
-    quantity: number,
+    quantity: number
 }
 
 export type CartState = {
-    readonly isCartOpen: boolean,
+    readonly isCartOpen: boolean
     readonly cartItems: CartItem[]
 }
 
 const INITIAL_STATE: CartState = {
     isCartOpen: false,
-    cartItems: []
+    cartItems: [],
 }
 
 const cartSlice = createSlice({
@@ -23,35 +23,45 @@ const cartSlice = createSlice({
     initialState: INITIAL_STATE,
     reducers: {
         cartItemAdded(state, action: PayloadAction<Product>) {
-            const cartItemToUpdate = state.cartItems.find((cartItem) => cartItem.id === action.payload.id)
+            const cartItemToUpdate = state.cartItems.find(
+                (cartItem) => cartItem.id === action.payload.id
+            )
             if (cartItemToUpdate) {
                 cartItemToUpdate.quantity += 1
             } else {
-                state.cartItems.push({...action.payload, quantity: 1})
+                state.cartItems.push({ ...action.payload, quantity: 1 })
             }
         },
         cartItemRemoved(state, action: PayloadAction<number>) {
-            state.cartItems = state.cartItems.filter((cartItem) => cartItem.id !== action.payload)
+            state.cartItems = state.cartItems.filter(
+                (cartItem) => cartItem.id !== action.payload
+            )
         },
         cartItemQuantityDecreasedByOne(state, action: PayloadAction<number>) {
-            const cartItemToUpdate = state.cartItems.find((cartItem) => cartItem.id === action.payload)
+            const cartItemToUpdate = state.cartItems.find(
+                (cartItem) => cartItem.id === action.payload
+            )
             if (cartItemToUpdate) {
                 cartItemToUpdate.quantity -= 1
                 if (cartItemToUpdate.quantity === 0) {
-                    state.cartItems = state.cartItems.filter((cartItem) => cartItem.id !== action.payload)
+                    state.cartItems = state.cartItems.filter(
+                        (cartItem) => cartItem.id !== action.payload
+                    )
                 }
             }
         },
         cartItemQuantityIncreasedByOne(state, action: PayloadAction<number>) {
-            const cartItemToUpdate = state.cartItems.find((cartItem) => cartItem.id === action.payload)
+            const cartItemToUpdate = state.cartItems.find(
+                (cartItem) => cartItem.id === action.payload
+            )
             if (cartItemToUpdate) {
                 cartItemToUpdate.quantity += 1
             }
         },
         toggledCartOpen(state, action: PayloadAction<boolean>) {
             state.isCartOpen = action.payload
-        }
-    }
+        },
+    },
 })
 
 export const {
@@ -59,21 +69,38 @@ export const {
     cartItemRemoved,
     cartItemQuantityIncreasedByOne,
     cartItemQuantityDecreasedByOne,
-    toggledCartOpen
+    toggledCartOpen,
 } = cartSlice.actions
 
 export const cartReducer = cartSlice.reducer
 
 const selectCartState = (state: RootState): CartState => state.cart
 
-export const selectCartItems = createSelector([selectCartState], (cart) => cart.cartItems)
+export const selectCartItems = createSelector(
+    [selectCartState],
+    (cart) => cart.cartItems
+)
 
-export const selectCartItemCount = createSelector([selectCartItems],
-    (cartItems) => cartItems.reduce((total: number, cartItem: CartItem) =>
-        total + cartItem.quantity, 0))
+export const selectCartItemCount = createSelector(
+    [selectCartItems],
+    (cartItems) =>
+        cartItems.reduce(
+            (total: number, cartItem: CartItem) => total + cartItem.quantity,
+            0
+        )
+)
 
-export const selectCartTotalPrice = createSelector([selectCartItems],
-    (cartItems) => cartItems.reduce((total: number, cartItem: CartItem) =>
-        total + (cartItem.quantity * cartItem.price), 0))
+export const selectCartTotalPrice = createSelector(
+    [selectCartItems],
+    (cartItems) =>
+        cartItems.reduce(
+            (total: number, cartItem: CartItem) =>
+                total + cartItem.quantity * cartItem.price,
+            0
+        )
+)
 
-export const selectIsCartOpen = createSelector([selectCartState], (cart) => cart.isCartOpen)
+export const selectIsCartOpen = createSelector(
+    [selectCartState],
+    (cart) => cart.isCartOpen
+)
