@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { CategoryItem } from '../categories/categories.types'
 import { createSelector } from 'reselect'
 import { RootState } from '../store'
 import { Product } from '../../components/product/product.component'
+import { CategoryItem } from '../categories/categories.store'
 
 export type CartItem = CategoryItem & {
     quantity: number

@@ -20,7 +20,7 @@ import {
     writeBatch,
     QueryDocumentSnapshot,
 } from 'firebase/firestore'
-import { Category } from '../../store/categories/categories.types'
+import { Category } from '../../store/categories/categories.store'
 
 const firebaseConfig = {
     apiKey: 'AIzaSyC8zo0-nXcFRrb_qFqyIYPz_ncwY_ZAl3s',

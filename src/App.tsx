@@ -7,14 +7,14 @@ import Checkout from './routes/checkout/checkout.component'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import { checkUserSession } from './store/user/user.action'
-import { fetchCategoriesStart } from './store/categories/categories.action'
 import { GlobalStyles } from './global.styles'
+import { fetchCategoriesStarted } from './store/categories/categories.store'
 
 const App = () => {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(checkUserSession())
-        dispatch(fetchCategoriesStart())
+        dispatch(fetchCategoriesStarted())
     })
 
     return (

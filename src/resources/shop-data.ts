@@ -1,4 +1,4 @@
-import { Category } from '../store/categories/categories.types'
+import { Category } from '../store/categories/categories.store'
 
 const SHOP_DATA: Category[] = [
     {
