@@ -5,7 +5,7 @@ import {
     ShopNow,
     Title,
 } from './directory-item.styles'
-import { Category } from '../../store/categories/categories.types'
+import { Category } from '../../store/categories/categories.store'
 
 type DirectoryItemProps = {
     category: Category

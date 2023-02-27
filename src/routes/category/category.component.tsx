@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react'
 import ProductComponent from '../../components/product/product.component'
 import { CategoryContainer, CategoryTitle } from './category.styles'
 import { useSelector } from 'react-redux'
+import Spinner from '../../components/spinner/spinner.component'
 import {
     selectCategoriesIsLoading,
     selectCategoriesMap,
-} from '../../store/categories/categories.selector'
-import Spinner from '../../components/spinner/spinner.component'
+} from '../../store/categories/categories.store'
 
 type CategoryRouteParams = {
     category: string
