@@ -7,11 +7,11 @@ import {
     SignInHeader,
 } from './sign-in.styles'
 import { useDispatch } from 'react-redux'
-import {
-    emailSignInStart,
-    googleSignInStart,
-} from '../../store/user/user.action'
 import { AuthError, AuthErrorCodes } from 'firebase/auth'
+import {
+    emailSignInStarted,
+    googleSignInStarted,
+} from '../../store/user/user.reducer'
 
 const defaultFormFields = {
     email: '',
@@ -30,7 +30,7 @@ const SignInForm = () => {
 
     const signInUser = () => {
         try {
-            dispatch(emailSignInStart(email, password))
+            dispatch(emailSignInStarted({ email, password }))
             resetFormFields()
         } catch (error) {
             switch ((error as AuthError).code) {
@@ -56,7 +56,7 @@ const SignInForm = () => {
     }
 
     const signInWithGoogle = async () => {
-        dispatch(googleSignInStart())
+        dispatch(googleSignInStarted())
     }
 
     return (

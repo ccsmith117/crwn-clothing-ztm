@@ -5,8 +5,8 @@ import Button from '../button/button.component'
 import './sign-up.styles'
 import { SignUpContainer, SignUpHeader } from './sign-up.styles'
 import { useDispatch } from 'react-redux'
-import { signUp } from '../../store/user/user.action'
 import { AuthError, AuthErrorCodes } from 'firebase/auth'
+import { signUpStarted } from '../../store/user/user.reducer'
 
 const defaultFormFields = {
     displayName: '',
@@ -42,7 +42,7 @@ const SignUpForm = () => {
 
     const createUser = () => {
         try {
-            dispatch(signUp(email, password, displayName))
+            dispatch(signUpStarted({ email, password, displayName }))
             resetFormFields()
         } catch (error) {
             if ((error as AuthError).code === AuthErrorCodes.EMAIL_EXISTS) {

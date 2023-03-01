@@ -1,9 +1,7 @@
 import logger from 'redux-logger'
 import { rootReducer } from './root-reducer'
-import { persistReducer, persistStore, PersistConfig } from 'redux-persist'
+import { PersistConfig, persistReducer, persistStore } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import createSagaMiddleware from 'redux-saga'
-import { rootSaga } from './root-saga'
 import { configureStore } from '@reduxjs/toolkit'
 import {
     FLUSH,
@@ -17,10 +15,8 @@ import { listenerMiddleware } from './listener-middleware'
 
 export type RootState = ReturnType<typeof rootReducer>
 
-const sagaMiddleware = createSagaMiddleware()
-
 const devMiddleWares = [logger]
-const generalMiddleWares = [sagaMiddleware, listenerMiddleware]
+const generalMiddleWares = [listenerMiddleware]
 
 const getMiddleWares = () => {
     return process.env.NODE_ENV === 'development'
@@ -56,7 +52,5 @@ export const store = configureStore({
             },
         }).concat(...getMiddleWares()),
 })
-
-sagaMiddleware.run(rootSaga)
 
 export const persistor = persistStore(store)

@@ -9,15 +9,17 @@ import {
     NavigationLinksContainer,
 } from './navigation-bar.styles'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectCurrentUser } from '../../store/user/user.selector'
-import { signOut } from '../../store/user/user.action'
 import { selectIsCartOpen } from '../../store/cart/cart.store'
+import {
+    selectCurrentUser,
+    signOutStarted,
+} from '../../store/user/user.reducer'
 
 const NavigationBar = () => {
     const currentUser = useSelector(selectCurrentUser)
     const isCartOpen = useSelector(selectIsCartOpen)
     const dispatch = useDispatch()
-    const signOutUser = () => dispatch(signOut())
+    const signOutUser = () => dispatch(signOutStarted())
 
     return (
         <>
